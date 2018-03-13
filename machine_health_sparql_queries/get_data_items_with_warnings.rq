@@ -1,0 +1,16 @@
+ 
+
+# Find the device which has component with a dataitem condition "WARNING" and display the timestamp and the condition message.
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX sem: <http://semanticweb.cs.vu.nl/2009/11/sem/>
+SELECT ?device ?component ?timestamp ?message
+WHERE
+{
+    ?device ssn:hasPart ?component.
+    ?component mmd:hasDataItem ?dataitem.
+    ?dataitem   mmd:hasCondition "WARNING";
+                sem:hasTimestamp ?timestamp;
+                mmd:hasConditionMessage ?message.
+   }

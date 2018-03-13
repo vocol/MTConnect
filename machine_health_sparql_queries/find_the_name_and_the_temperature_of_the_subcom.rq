@@ -1,0 +1,13 @@
+#9. Find the name and the temperature of the subcomponents
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX saref: <https://w3id.org/c>
+SELECT ?subcomponent ?name ?temperature
+WHERE
+{
+    ?component ssn:hasSubsystem ?subcomponent.
+	?subcomponent saref:hasName ?name;
+               mmd:hasDataItem ?dataitem.
+	?dataitem mmd:hasTemperature ?temperature.
+} 

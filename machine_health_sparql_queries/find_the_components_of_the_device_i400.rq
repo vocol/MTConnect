@@ -1,0 +1,12 @@
+
+#10. Find the components of the device "i400"
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX saref: <https://w3id.org/c>
+SELECT ?component 
+WHERE
+{
+    mmd:I400 saref:hasName "MFMS10-MC1".
+	mmd:I400 ssn:hasPart ?component
+}  

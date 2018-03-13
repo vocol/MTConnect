@@ -1,0 +1,264 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn> .
+@prefix mto: <http://example.org/mto/mtconnectmachinedata#> .
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix part: <http://www.w3.org/2001/sw/BestPractices/OEP/SimplePartWhole/part.owl#>.
+@prefix saref: <https://w3id.org/c>.
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/>.
+
+mto:Agie
+	rdfs:label "Agie";
+	rdf:type ssn:Device, owl:NamedIndividual;
+	rdfs:isDefinedBy mto: ;
+	mto:hasCreationtime "2018-02-15T13:05:28Z"^^xsd:dateTime;
+	mto:hasId "GFAgie01";
+	saref:hasName "GFAgie01";
+	saref:hasManufacturer "Agie Charmilles";
+	saref:hasModel "HPM600U";
+	mto:hasUuid "mtc_adapter001";
+	saref:hasDescription  "Agie Mikron HPM600U - GF Agie Charmilles HPM600U";
+	ssn:hasPart mto:Axe2, mto:Controller2;
+	mto:hasDataItem mto:Availability2, mto:EmergencyStop1, mto:SystemCondition3, mto:AssetChanged1, mto:AssetRemoved1.
+mto:Availability2	 
+		 rdf:type mto:Availability ;
+		 mto:hasId "GFAgie01-dtop_1";
+		 mto:hasName "avail";
+		 mto:hasSequence "9124641";
+		 sem:hasTimeStamp "2018-02-15T10:21:39.173760";
+		 mto:hasAvailability "AVAILABLE";
+		 mto:hasCategory "EVENT" .
+mto:EmergencyStop1	 
+		 rdf:type mto:EmergencyStop ;
+		 mto:hasId "GFAgie01-dtop_2";
+		 mto:hasName "estop";
+		 mto:hasSequence "9124642";
+		 sem:hasTimeStamp "2018-02-15T10:21:39.174254";
+		 mto:hasEmergencyStop "ARMED";
+		 mto:hasCategory "EVENT" .
+mto:SystemCondition3 
+				rdf:type mto:SystemCon;
+			    saref:hasName "system";
+				mto:hasId "GFAgie01-dtop_3";
+				mto:hasSequence "9124640";
+				sem:hasTimeStamp "2018-02-15T10:21:39.173453";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+
+
+mto:Axe2
+	rdf:type mto:Axe;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:Agie;
+	owl:differentFrom mto:Controller2;
+	ssn:hasSubSystem mto:Linaxe3, mto:Linaxe4, mto:Linaxe5, mto:Rotaxe4, mto:Rotaxe5;
+	mto:hasId "GFAgie01-axes_1";
+	saref:hasName "axes".
+
+mto:Linaxe3
+	rdf:type mto:LinearAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe4, mto:Linaxe5, mto:Rotaxe4, mto:Rotaxe5;
+	mto:hasId "GFAgie01-X_1";
+	saref:hasName "X";
+	mto:hasDataItem mto:LinPos3.
+mto:LinPos3    rdf:type mto:Position;
+				saref:hasName "Xposition";
+				mto:hasId "GFAgie01-X_2";
+				mto:hasSequence "9142001";
+				sem:hasTimeStamp "2018-02-15T13:32:31.971564";
+				mto:hasCategory "SAMPLE";
+				mto:hasPosition 6.92165;
+				mto:hasSubType "ACTUAL".
+
+mto:Linaxe4
+	rdf:type mto:LinearAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe3, mto:Linaxe5, mto:Rotaxe4, mto:Rotaxe5;
+	mto:hasId "GFAgie01-Y_1";
+	saref:hasName "Y";
+	mto:hasDataItem mto:LinPos4.
+mto:LinPos4    rdf:type mto:Position;
+				saref:hasName "Yposition";
+				mto:hasId "GFAgie01-Y_2";
+				mto:hasSequence "9142003";
+				sem:hasTimeStamp "2018-02-15T13:32:32.371769";
+				mto:hasCategory "SAMPLE";
+				mto:hasPosition -26.28058;
+				mto:hasSubType "ACTUAL".
+
+mto:Linaxe5
+	rdf:type mto:LinearAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe3, mto:Linaxe4, mto:Rotaxe4, mto:Rotaxe5;
+	mto:hasId "GFAgie01-Z_1";
+	saref:hasName "Z";
+	mto:hasDataItem mto:LinPos5.
+mto:LinPos5    rdf:type mto:Position;
+				saref:hasName "Zposition";
+				mto:hasId "GFAgie01-Z_2";
+				mto:hasSequence "9142004";
+				sem:hasTimeStamp "2018-02-15T13:32:33.572367";
+				mto:hasCategory "SAMPLE";
+				mto:hasPosition 16.85439;
+				mto:hasSubType "ACTUAL".
+
+
+mto:Rotaxe4
+	rdf:type mto:RotaryAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe3, mto:Linaxe4, mto:Linaxe5, mto:Rotaxe5;
+	mto:hasId "GFAgie01-A_1";
+	saref:hasName "A";
+	mto:hasDataItem mto:RotAngle3.
+mto:RotAngle3 rdf:type mto:Angle;
+			    saref:hasName "Aposition";
+				mto:hasId "GFAgie01-A_2";
+				mto:hasSequence "9142009";
+				sem:hasTimeStamp "2018-02-15T13:32:34.576561";
+				mto:hasSubType "ACTUAL";
+				mto:hasAngle -83.2887;
+				mto:hasCategory "SAMPLE".
+
+mto:Rotaxe5
+	rdf:type mto:RotaryAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe3, mto:Linaxe4, mto:Linaxe5, mto:Rotaxe4;
+	mto:hasId "GFAgie01-C_1";
+	saref:hasName "C";
+	mto:hasDataItem mto:RotAngle4.
+mto:RotAngle4 rdf:type mto:Angle;
+			    saref:hasName "Cposition";
+				mto:hasId "GFAgie01-C_2";
+				mto:hasSequence "9142008";
+				sem:hasTimeStamp "2018-02-15T13:32:34.576406";
+				mto:hasSubType "ACTUAL";
+				mto:hasAngle 166.5762;
+				mto:hasCategory "SAMPLE".
+
+mto:Controller2
+	rdf:type mto:Controller;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:Agie;
+	owl:differentFrom mto:Axe2;
+	mto:hasId "GFAgie01-controller_basic_1";
+	saref:hasName "controller_basic";
+	ssn:hasSubSystem mto:Path1;
+	mto:hasDataItem mto:PathFeedrateOverride3, mto:RotaryVelocityOverride3, mto:Temp1, mto:ActuatorCon4, mto:ConCommunication2, mto:ConCommunication3, mto:ConCommunication4, mto:ConLogicProgram2, mto:MotionProgram2.
+mto:PathFeedrateOverride3 rdf:type mto:PathFeedrateOverride;
+				saref:hasName "Fovr";
+				mto:hasId "GFAgie01-controller_basic_2";
+				mto:hasSequence "9132867";
+				sem:hasTimeStamp "2018-02-15T12:16:37.271709";
+				mto:hasSubType "OVERRIDE";
+				mto:hasPathFeedrateOverride 100.75;
+				mto:hasCategory "EVENT".
+mto:RotaryVelocityOverride3 rdf:type mto:RotaryVelocityOverride;
+				saref:hasName "Sovr";
+				mto:hasId "GFAgie01-controller_basic_3";
+				mto:hasSequence "9124638";
+				sem:hasTimeStamp "2018-02-15T10:21:39.172989";
+				mto:hasCategory "EVENT";
+				mto:hasRotaryVelocityOverride 105.25.
+mto:Temp1 rdf:type mto:Temperature;
+				saref:hasName "cnc_temp";
+				mto:hasId "GFAgie01-controller_basic_10";
+				mto:hasSequence "9124648";
+				sem:hasTimeStamp "2018-02-15T10:21:39.175990";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ActuatorCon4 rdf:type mto:ActuatorCondition;
+				saref:hasName "servo";
+				mto:hasId "GFAgie01-controller_basic_4";
+				mto:hasSequence "9124643";
+				sem:hasTimeStamp "2018-02-15T10:21:39.174545";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ConCommunication2 rdf:type mto:Communication;
+				saref:hasName "comms";
+				mto:hasId "GFAgie01-controller_basic_5";
+				mto:hasSequence "9124644";
+				sem:hasTimeStamp "2018-02-15T10:21:39.174833";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ConCommunication3 rdf:type mto:Communication;
+				saref:hasName "pneumatic";
+				mto:hasId "GFAgie01-controller_basic_6";
+				mto:hasSequence "9124646";
+				sem:hasTimeStamp "2018-02-15T10:21:39.175469";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ConCommunication4 rdf:type mto:Communication;
+				saref:hasName "hydraulic";
+				mto:hasId "GFAgie01-controller_basic_7";
+				mto:hasSequence "9124647";
+				sem:hasTimeStamp "2018-02-15T10:21:39.175730";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ConLogicProgram2 rdf:type mto:LogicProgram;
+				saref:hasName "logic";
+				mto:hasId "GFAgie01-controller_basic_8";
+				mto:hasSequence "9132525";
+				sem:hasTimeStamp "2018-02-15T12:11:53.372480";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:MotionProgram2 rdf:type mto:MotionProgram;
+				saref:hasName "motion";
+				mto:hasId "GFAgie01-controller_basic_9";
+				mto:hasSequence "9124649";
+				sem:hasTimeStamp "2018-02-15T10:21:39.176248";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+	
+mto:Path2
+	rdf:type mto:Path;
+	rdfs:isDefinedBy mto: ;
+	mto:hasId "GFAgie01-path_basic_1";
+	saref:hasName "path_basic";
+	mto:hasDataItem mto:Execution3, mto:ControllerMode3, mto:Program3, mto:Line3, mto:xMotion1, mto:PathPos1.
+mto:Execution3 rdf:type mto:Execution;
+				saref:hasName "execution";
+				mto:hasId "GFAgie01-path_basic_2";
+				mto:hasSequence "9132515";
+				sem:hasTimeStamp "2018-02-15T12:11:39.072431";
+				mto:hasCategory "EVENT";
+				mto:hasExecution "ACTIVE".
+mto:ControllerMode3 rdf:type mto:ControllerMode;
+				saref:hasName "mode";
+				mto:hasId "GFAgie01-path_basic_3";
+				mto:hasSequence "9132514";
+				sem:hasTimeStamp "2018-02-15T12:11:36.871811";
+				mto:hasCategory "EVENT";
+				mto:hasControllerMode "AUTOMATIC".
+mto:Program3 rdf:type mto:Program;
+				mto:hasId "GFAgie01-path_basic_4";
+				saref:hasName "program";
+				mto:hasSequence "9132512";
+				sem:hasTimeStamp "2018-02-15T12:11:33.276439";
+				mto:hasCategory "EVENT";
+				mto:hasProgram "TNC:\BRIAN\WARMUP.H".
+mto:Line3 rdf:type mto:Line;
+				saref:hasName "line";
+				mto:hasId "GFAgie01-path_basic_5";
+				mto:hasSequence "9141005";
+				sem:hasTimeStamp "2018-02-15T13:26:52.671478";
+				mto:hasCategory "EVENT";
+				mto:hasLine 7.
+mto:xMotion1 rdf:type mto:xMotion;
+				saref:hasName "move";
+				mto:hasId "GFAgie01-path_basic_6";
+				mto:hasSequence "9124655";
+				sem:hasTimeStamp "2018-02-15T10:21:39.176853";
+				mto:hasCategory "EVENT";
+				mto:hasxMotion "NORMAL".
+mto:PathPos1 rdf:type mto:PathPosition;
+				saref:hasName "path_pos";
+				mto:hasId "GFAgie01-path_basic_7";
+				mto:hasSequence "9141993";
+				sem:hasTimeStamp "2018-02-15T13:32:29.973839";
+				mto:hasCategory "SAMPLE";
+				mto:hasPathPosition "-10.9268100000 -7.2845400000 16.1901300000".

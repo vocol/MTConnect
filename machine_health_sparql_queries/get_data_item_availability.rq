@@ -1,0 +1,11 @@
+# Find all the device names who have dataitem Availability and their availability.
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX saref: <https://w3id.org/c>
+SELECT *
+WHERE
+{
+    ?device saref:hasName ?name;
+            mmd:hasDataItem ?dataitem.
+  	?dataitem	 mmd:hasAvailability ?availability.
+} 

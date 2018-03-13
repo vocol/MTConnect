@@ -1,0 +1,13 @@
+#7. Find the rotary velocity of the subcomponents of the device and the subcomponents
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX sem: <http://semanticweb.cs.vu.nl/2009/11/sem/>
+SELECT ?device ?component ?subcomponent ?dataitem ?rotaryvelocity
+WHERE
+{
+    ?device   ssn:hasPart ?component.
+    ?component ssn:hasSubsystem ?subcomponent.
+    ?subcomponent mmd:hasDataItem ?dataitem.
+    ?dataitem mmd:hasRotaryVelocity ?rotaryvelocity.
+}  

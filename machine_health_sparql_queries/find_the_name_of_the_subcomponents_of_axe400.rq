@@ -1,0 +1,13 @@
+
+
+#11. Find the name of the subcomponents of axe400
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX saref: <https://w3id.org/c>
+SELECT ?subcomponent ?name
+WHERE
+{
+    mmd:Axe400 ssn:hasSubsystem ?subcomponent.
+    ?subcomponent saref:hasName ?name.
+}  

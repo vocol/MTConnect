@@ -1,0 +1,171 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn> .
+@prefix mto: <http://example.org/mto/mtconnectmachinedata#> .
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix part: <http://www.w3.org/2001/sw/BestPractices/OEP/SimplePartWhole/part.owl#>.
+@prefix saref: <https://w3id.org/c>.
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/>.
+
+mto:Hurco42
+	rdfs:label "Hurco42";
+	rdf:type ssn:Device, owl:NamedIndividual;
+	rdfs:isDefinedBy mto: ;
+	mto:hasCreationTime "2018-02-15T13:05:28Z"^^xsd:dateTime;
+	mto:hasId "Hurco05";
+	saref:hasName "Hurco05";
+	saref:hasManufacturer "Hurco";
+	saref:hasModel "VMX42";
+	mto:hasUuid "mtc_adapter009";
+	saref:hasDescription  "Hurco VMX 42";
+	ssn:hasPart mto:Axe4, mto:Controller4;
+	mto:hasDataItem mto:Availability4, mto:AssetChanged4, mto:AssetRemoved4.
+mto:Availability4	 
+		 rdf:type mto:Availability ;
+		 mto:hasId "Hurco05-dtop_1";
+		 saref:hasName "avail";
+		 mto:hasSequence "229";
+		 sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+		 mto:hasAvailability "UNAVAILABLE";
+		 mto:hasCategory "EVENT" .
+
+
+mto:Axe4
+	rdf:type mto:Axe;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:Hurco42;
+	owl:differentFrom mto:Controller4;
+	ssn:hasSubSystem mto:Rotaxe7;
+	mto:hasId "Hurco05-axes";
+	saref:hasName "Axes".
+
+mto:Rotaxe7
+	rdf:type mto:RotaryAxe;
+	rdfs:isDefinedBy mto: ;
+	mto:hasId "Hurco05-C";
+	saref:hasName "C";
+	mto:hasDataItem mto:RotVel2, mto:RotVelOver2.
+mto:RotVel2 rdf:type mto:RotaryVelocity;
+			    saref:hasName "Spindle_Speed";
+				mto:hasId "Hurco05-C_1";
+				mto:hasSequence "226";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasSubType "ACTUAL";
+				mto:hasRotaryVelocity "UNAVAILABLE";
+				mto:hasCategory "SAMPLE".
+mto:RotVelOver2 rdf:type mto:RotaryVelocityOverride;
+			    saref:hasName "Spindle_Override";
+				mto:hasId "Hurco05-C_2";
+				mto:hasSequence "227";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasRotaryVelocityOverride "UNAVAILABLE";
+				mto:hasCategory "EVENT".
+
+mto:Controller4
+	rdf:type mto:Controller;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:Hurco42;
+	owl:differentFrom mto:Axe4;
+	mto:hasId "Hurco05-controller";
+	saref:hasName "controller";
+	ssn:hasSubSystem mto:Path4;
+	mto:hasDataItem mto:EmergencyStop4.
+mto:EmergencyStop4 rdf:type mto:EmergencyStop;
+				saref:hasName "EStop_State";
+				mto:hasId "Hurco05-controller_1";
+				mto:hasSequence "228";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasEmergencyStop "UNAVAILABLE";
+				mto:hasCategory "EVENT".
+	
+mto:Path4
+	rdf:type mto:Path;
+	rdfs:isDefinedBy mto: ;
+	mto:hasId "Hurco05-path";
+	saref:hasName "Path";
+	mto:hasDataItem mto:Execution4, mto:Program5, mto:ProgramEditName4, mto:Line5, mto:PartCount4, mto:ToolNumber4, mto:AccTime3, mto:AccTime4, mto:PathFeedRate4, mto:PathFeedRateOver5, mto:PathFeedRateOver6.
+mto:Execution4 rdf:type mto:Execution;
+				saref:hasName "Program_Status";
+				mto:hasId "Hurco05-path_5";
+				mto:hasSequence "236";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "EVENT";
+				mto:hasExecution "UNAVAILABLE".
+mto:Program5 rdf:type mto:Program;
+				mto:hasId "Hurco05-path_2";
+				saref:hasName "Program_Name_Running";
+				mto:hasSequence "233";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "EVENT";
+				mto:hasProgram "UNAVAILABLE".
+mto:Line5 rdf:type mto:Line;
+				saref:hasName "Block_Number";
+				mto:hasId "Hurco05-path_1";
+				mto:hasSequence "230";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "EVENT";
+				mto:hasLine "UNAVAILABLE".
+mto:ProgramEditName4 rdf:type mto:ProgramEditName;
+				saref:hasName "Program_Name_Editing";
+				mto:hasId "Hurco05-path_3";
+				mto:hasSequence "234";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "EVENT";
+				mto:hasProgramEditName "UNAVAILABLE".
+mto:PartCount4 rdf:type mto:PartCount;
+				saref:hasName "Part_Count";
+				mto:hasId "Hurco05-path_4";
+				mto:hasSequence "235";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "EVENT";
+				mto:hasSubType "ALL";
+				mto:hasPartCount "UNAVAILABLE".
+mto:ToolNumber4 rdf:type mto:ToolNumber;
+				saref:hasName "Current_Tool";
+				mto:hasId "Hurco05-path_6";
+				mto:hasSequence "237";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "EVENT";
+				mto:hasToolNumber "UNAVAILABLE".
+mto:AccTime3 rdf:type mto:AccumulatedTime;
+				saref:hasName "Program_Runtime_Seconds";
+				mto:hasId "Hurco05-path_7";
+				mto:hasSequence "238";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "SAMPLE";
+				mto:hasAccumulatedTime "UNAVAILABLE".
+mto:AccTime4 rdf:type mto:AccumulatedTime;
+				saref:hasName "Spindle_Time";
+				mto:hasId "Hurco05-path_8";
+				mto:hasSequence "239";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "SAMPLE";
+				mto:hasAccumulatedTime "UNAVAILABLE".
+mto:PathFeedRate4 rdf:type mto:PathFeedRate;
+				saref:hasName "Feed_Rate";
+				mto:hasId "Hurco05-path_9";
+				mto:hasSequence "240s";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "SAMPLE";
+				mto:hasSubType "ACTUAL";
+				mto:hasPathFeedRate "UNAVAILABLE".
+mto:PathFeedRateOver5 rdf:type mto:PathFeedRateOverride;
+				saref:hasName "Feed_Override";
+				mto:hasId "Hurco05-path_10";
+				mto:hasSequence "231";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "SAMPLE";
+				mto:hasPathFeedRateOverride "UNAVAILABLE".
+mto:PathFeedRateOver6 rdf:type mto:PathFeedRateOverride;
+				saref:hasName "Rapid_Override";
+				mto:hasId "Hurco05-path_11";
+				mto:hasSequence "232";
+				sem:hasTimeStamp "2018-01-12T20:55:10.972514Z";
+				mto:hasCategory "SAMPLE";
+				mto:hasSubType "RAPID";
+				mto:hasPathFeedRateOverride "UNAVAILABLE".
+

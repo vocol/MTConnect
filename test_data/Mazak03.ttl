@@ -1,0 +1,550 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn> .
+@prefix mto: <http://example.org/mto/mtconnectmachinedata#> .
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix part: <http://www.w3.org/2001/sw/BestPractices/OEP/SimplePartWhole/part.owl#>.
+@prefix saref: <https://w3id.org/c>.
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/>.
+
+mto:Nexus1
+	rdfs:label "Mazak03";
+	rdf:type ssn:Device, owl:NamedIndividual;
+	rdfs:isDefinedBy mto: ;
+	mto:hasCreationtime "2018-02-11T19:29:34Z"^^xsd:dateTime;
+	mto:hasId "Mazak03";
+	saref:hasName "Mazak03";
+	saref:hasManufacturer "Mazak";
+	saref:hasModel "QTN";
+	mto:hasUuid "mtc_adapter004";
+	saref:hasDescription  "Mazak QuickTurn - Mazak QuickTurn Nexus 300";
+	ssn:hasPart mto:Axe1, mto:Controller1, mto:System1;
+	mto:hasDataItem mto:Availability1, mto:AssetChanged, mto:AssetRemoved.
+mto:Availability1	 
+		 rdf:type mto:Availability ;
+		 mto:hasId "Mazak03-dtop_1";
+		 mto:hasName "avail";
+		 mto:hasSequence "8093061";
+		 sem:hasTimeStamp "2018-02-11T13:50:03.871849";
+		 mto:hasAvailability "AVAILABLE";
+		 mto:hasCategory "EVENT" .
+
+
+mto:Axe1
+	rdf:type mto:Axe;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:Nexus1;
+	owl:differentFrom mto:Controller1, mto:System1;
+	ssn:hasSubSystem mto:Linaxe1, mto:Linaxe2, mto:Rotaxe1, mto:Rotaxe2, mto:Rotaxe3;
+	mto:hasId "Mazak03-base_1";
+	saref:hasName "base";
+	mto:hasDataItem mto:AxeActuatorCon.
+mto:AxeActuatorCon 
+				   rdf:type mto:ActuatorCondition ;
+				   saref:hasName "servo_cond";
+				   mto:hasId "Mazak03-base_2";
+				   mto:hasSequence "8093062";
+				   sem:hasTimeStamp "2018-02-11T13:50:04.771668";
+				   mto:hasCategory "CONDITION";
+				   mto:hasCondition "NORMAL".
+
+
+mto:Linaxe1
+	rdf:type mto:LinearAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe2, mto:Rotaxe1, mto:Rotaxe2, mto:Rotaxe3;
+	mto:hasId "Mazak03-X_1";
+	saref:hasName "X";
+	mto:hasDataItem mto:LinAxisFeedrate1, mto:LinLoad1, mto:LinPos1, mto:LinPos2.
+mto:LinAxisFeedrate1 rdf:type mto:AxisFeedrate;
+					 saref:hasName "Xfrt";
+					mto:hasId "Mazak03-X_5";
+					mto:hasSequence "8166104";
+					sem:hasTimeStamp "2018-02-11T19:25:43.471258";
+					mto:hasAxisFeedRate 0;
+					mto:hasCategory "SAMPLE".
+mto:LinLoad1 rdf:type mto:Load;
+				saref:hasName "Xload";
+				mto:hasId "Mazak03-X_4";
+				mto:hasSequence "8166105";
+				mto:hasLoad 48;
+				sem:hasTimeStamp "2018-02-11T19:25:43.471442";
+				mto:hasCategory "SAMPLE".
+mto:LinPos1    rdf:type mto:Position;
+				saref:hasName "Xabs";
+				mto:hasId "Mazak03-X_2";
+				mto:hasSequence "8166092";
+				sem:hasTimeStamp "2018-02-11T19:25:42.271754";
+				mto:hasSubType "ACTUAL";
+				mto:hasPosition 51.6636;
+				mto:hasCategory "SAMPLE".
+mto:LinPos2    rdf:type mto:Position;
+				saref:hasName "Xtravel";
+				mto:hasId "Mazak03-X_3";
+				mto:hasSequence "8093073";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772594";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL".
+
+mto:Linaxe2
+	rdf:type mto:LinearAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe1, mto:Rotaxe1, mto:Rotaxe2, mto:Rotaxe3;
+	mto:hasId "Mazak03-Z_1";
+	saref:hasName "Z";
+	mto:hasDataItem mto:LinAxisFeedrate2, mto:LinLoad2, mto:LinPos3, mto:LinPos4.
+mto:LinAxisFeedrate2 rdf:type mto:AxisFeedrate;
+					 saref:hasName "Zfrt";
+					mto:hasId "Mazak03-Z_5";
+					mto:hasSequence "8166835";
+					sem:hasTimeStamp "2018-02-11T19:28:23.871550";
+					mto:hasAxisFeedRate 0.4995333;
+					mto:hasCategory "SAMPLE".
+mto:LinLoad2 rdf:type mto:Load;
+				saref:hasName "Zload";
+				mto:hasId "Mazak03-Z_4";
+				mto:hasSequence "8162718";
+				mto:hasLoad 5;
+				sem:hasTimeStamp "2018-02-11T19:13:00.772035";
+				mto:hasCategory "SAMPLE".
+mto:LinPos3    rdf:type mto:Position;
+				saref:hasName "Zabs";
+				mto:hasId "Mazak03-Z_2";
+				mto:hasSequence "8167098";
+				sem:hasTimeStamp "2018-02-11T19:29:32.771239";
+				mto:hasSubType "ACTUAL";
+				mto:hasPosition -39.733982;
+				mto:hasCategory "SAMPLE".
+mto:LinPos4    rdf:type mto:Position;
+				saref:hasName "Ztravel";
+				mto:hasId "Mazak03-Z_3";
+				mto:hasSequence "8093077";
+				sem:hasTimeStamp "2018-02-11T13:50:04.773699";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL".
+
+mto:Rotaxe1
+	rdf:type mto:RotaryAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe1, mto:Linaxe2, mto:Rotaxe2, mto:Rotaxe3;
+	mto:hasId "Mazak03-C_1";
+	saref:hasName "C";
+	mto:hasDataItem mto:RotAngularVelocity1, mto:RotLoad1, mto:RotAngle1, mto:RotAngle2.
+mto:RotAngularVelocity1 rdf:type mto:AngularVelocity;
+				saref:hasName "Cfrt";
+				mto:hasId "Mazak03-C_3";
+				mto:hasSequence "8124052";
+				sem:hasTimeStamp "2018-02-11T16:38:55.272040";
+				mto:hasAngularVelocity 0;
+				mto:hasCategory "SAMPLE".
+mto:RotLoad1 rdf:type mto:Load;
+		 		saref:hasName "Cload";
+				mto:hasId "Mazak03-C_2";
+				mto:hasSequence "8093084";
+				mto:hasLoad 0;
+				sem:hasTimeStamp "2018-02-11T13:50:04.774113";
+				mto:hasCategory "SAMPLE".
+mto:RotAngle1 rdf:type mto:Angle;
+			    saref:hasName "Cdeg";
+				mto:hasId "Mazak03-C_4";
+				mto:hasSequence "8128195";
+				sem:hasTimeStamp "2018-02-11T16:59:58.771178";
+				mto:hasAngle 0;
+				mto:hasSubType "ACTUAL";
+				mto:hasCategory "SAMPLE".
+mto:RotAngle2 rdf:type mto:Angle;
+			    saref:hasName "Ctravel";
+				mto:hasId "Mazak03-C_5";
+				mto:hasSequence "8093081";
+				sem:hasTimeStamp "2018-02-11T13:50:04.773940";
+				mto:hasCondition "CONDITION";
+				mto:hasCategory "SAMPLE".
+
+mto:Rotaxe2
+	rdf:type mto:RotaryAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe1, mto:Linaxe2, mto:Rotaxe1, mto:Rotaxe3;
+	mto:hasId "Mazak03-S_1";
+	saref:hasName "S";
+	mto:hasDataItem mto:RotLoad2, mto:RotLoad3, mto:RotaryVelocity1, mto:RotTemperature1, mto:RotTemperature2.
+mto:RotLoad2 rdf:type mto:Load;
+		 		saref:hasName "S1load";
+				mto:hasId "Mazak03-S_3";
+				mto:hasSequence "8123090";
+				mto:hasLoad 2;
+				mto:hasCategory "SAMPLE";
+				sem:hasTimeStamp "2018-02-11T16:35:06.774041".
+mto:RotLoad3 rdf:type mto:Load;
+		 		saref:hasName "Sload_cond";
+				mto:hasId "Mazak03-S_5";
+				mto:hasSequence "8093093";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774627".
+mto:RotaryVelocity1 rdf:type mto:RotaryVelocity;
+			    saref:hasName "Srpm";
+				mto:hasId "Mazak03-S_2";
+				mto:hasSequence "8124706";
+				sem:hasTimeStamp "2018-02-11T16:41:47.571216";
+				mto:hasRotaryVelocity 0;
+				mto:hasSubType "ACTUAL";
+				mto:hasCategory "SAMPLE".
+mto:RotTemperature1 rdf:type mto:Temperature;
+			    saref:hasName "Stemp";
+				mto:hasId "Mazak03-S_4";
+				mto:hasSequence "8133728";
+				sem:hasTimeStamp "2018-02-11T17:24:13.171324";
+				mto:hasTemperature 26;
+				mto:hasCategory "SAMPLE".
+mto:RotTemperature2 rdf:type mto:Temperature;
+			    saref:hasName "Stemp_cond";
+				mto:hasId "Mazak03-S_6";
+				mto:hasSequence "8093094";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774685";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+				
+mto:Rotaxe3
+	rdf:type mto:RotaryAxe;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Linaxe1, mto:Linaxe2, mto:Rotaxe1, mto:Rotaxe2;
+	mto:hasId "Mazak03-S2_1";
+	saref:hasName "S2";
+	mto:hasDataItem mto:RotLoad4, mto:RotLoad5, mto:RotaryVelocity2, mto:RotTemperature3, mto:RotTemperature4.
+mto:RotLoad5 rdf:type mto:Load;
+		 		saref:hasName "C2load";
+				mto:hasId "Mazak03-S2_5";
+				mto:hasSequence "8093088";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774343".
+mto:RotLoad4 rdf:type mto:Load;
+		 		saref:hasName "S2load";
+				mto:hasId "Mazak03-S2_3";
+				mto:hasSequence "8145429";
+				mto:hasLoad 0;
+				mto:hasCategory "SAMPLE";
+				sem:hasTimeStamp "2018-02-11T18:07:58.672369".
+mto:RotaryVelocity2 rdf:type mto:RotaryVelocity;
+			    saref:hasName "S2rpm";
+				mto:hasId "Mazak03-S2_2";
+				mto:hasSequence "8166097";
+				sem:hasTimeStamp "2018-02-11T19:25:42.272295";
+				mto:hasRotaryVelocity 376;
+				mto:hasSubType "ACTUAL";
+				mto:hasCategory "SAMPLE".
+mto:RotTemperature3 rdf:type mto:Temperature;
+			    saref:hasName "S2temp";
+				mto:hasId "Mazak03-S2_4";
+				mto:hasSequence "8165649";
+				sem:hasTimeStamp "2018-02-11T19:24:00.871426";
+				mto:hasTemperature 28;
+				mto:hasCategory "SAMPLE".
+mto:RotTemperature4 rdf:type mto:Temperature;
+			    saref:hasName "S2temp_cond";
+				mto:hasId "Mazak03-S2_6";
+				mto:hasSequence "8093089";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774398";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+
+
+mto:Controller1
+	rdf:type mto:Controller;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:I400;
+	owl:differentFrom mto:Axe1, mto:System1;
+	mto:hasId "Mazak03-controller_1";
+	saref:hasName "controller";
+	ssn:hasSubSystem mto:Path1;
+	mto:hasDataItem mto:ConCommunication1, mto:ConLogicProgram1, mto:SystemCondition1, mto:ConPalletNumber1.
+mto:ConCommunication1 rdf:type mto:Communication;
+				saref:hasName "comms_cond";
+				mto:hasId "Mazak03-controller_2";
+				mto:hasSequence "8093063";
+				sem:hasTimeStamp "2018-02-11T13:50:04.771791";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ConPalletNumber1 rdf:type mto:PalletNumber;
+			    saref:hasName "pallet_num";
+				mto:hasId "Mazak03-controller_5";
+				mto:hasSequence "8093072";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772536";
+				mto:hasPalletNumber 0;
+				mto:hasCategory "EVENT".
+mto:SystemCondition1 rdf:type mto:SystemCon;
+			   saref:hasName "system_cond";
+				mto:hasId "Mazak03-controller_4";
+				mto:hasSequence "8133808";
+				sem:hasTimeStamp "2018-02-11T17:24:34.271743";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:ConLogicProgram1 rdf:type mto:LogicProgram;
+				saref:hasName "logic_cond";
+				mto:hasId "Mazak03-controller_3";
+				mto:hasSequence "8093064";
+				sem:hasTimeStamp "2018-02-11T13:50:04.771897";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+	
+mto:Path1
+	rdf:type mto:Path;
+	rdfs:isDefinedBy mto: ;
+	mto:hasId "Mazak03-path_1";
+	saref:hasName "path";
+	mto:hasDataItem mto:AccumulatedTime1, mto:AccumulatedTime2, mto:AccumulatedTime3, mto:PathFeedrate1, 
+					mto:Execution1, mto:ControllerMode1, mto:RotaryVelocityOverride1, mto:ToolAssetId1, mto:ToolGroup1, mto:ToolSuffix1, mto:Program1, mto:Program2, mto:Line1, mto:PartCount1, mto:ProgramComment1, mto:ProgramComment2, mto:PathFeedrateOverride1, mto:PathFeedrateOverride2, mto:SequenceNumber1, mto:xUnit,
+					mto:SystemCondition2, mto:MotionProgram1.
+mto:AccumulatedTime1 rdf:type mto:AccumulatedTime;
+				saref:hasName "auto_time";
+				mto:hasId "Mazak03-path_14";
+				mto:hasSequence "8167099";
+				sem:hasTimeStamp "2018-02-11T19:29:32.771482";
+				mto:hasSubType "x:AUTO";
+				mto:hasCategory "SAMPLE";
+				mto:hasAccumulatedTime 1689538.
+mto:AccumulatedTime2 rdf:type mto:AccumulatedTime;
+				saref:hasName "total_time";
+				mto:hasId "Mazak03-path_15";
+				mto:hasSequence "8167103";
+				sem:hasTimeStamp "2018-02-11T19:29:32.973261";
+				mto:hasSubType "x:TOTAL";
+				mto:hasCategory "SAMPLE";
+				mto:hasAccumulatedTime 10505484.
+mto:AccumulatedTime3 rdf:type mto:AccumulatedTime;
+				saref:hasName "cut_time";
+				mto:hasId "Mazak03-path_16";
+				mto:hasSequence "8167102";
+				sem:hasTimeStamp "2018-02-11T19:29:32.973084";
+				mto:hasSubType "x:CUT";
+				mto:hasCategory "SAMPLE";
+				mto:hasAccumulatedTime 1060563.
+mto:PathFeedrate1 rdf:type mto:PathFeedrate;
+				saref:hasName "Fact";
+				mto:hasId "Mazak03-path_7";
+				mto:hasSequence "8166108";
+				sem:hasTimeStamp "2018-02-11T19:25:43.471743";
+				mto:hasSubType "ACTUAL";
+				mto:hasCategory "SAMPLE";
+				mto:hasPathFeedrate 0.4995333.
+mto:Execution1 rdf:type mto:Execution;
+				saref:hasName "execution";
+				mto:hasId "Mazak03-path_10";
+				mto:hasSequence "8146200";
+				sem:hasTimeStamp "2018-02-11T18:11:14.775079";
+				mto:hasCategory "EVENT";
+				mto:hasExecution "ACTIVE".
+mto:ControllerMode1 rdf:type mto:ControllerMode;
+				saref:hasName "mode";
+				mto:hasId "Mazak03-path_11";
+				mto:hasSequence "8135235";
+				sem:hasTimeStamp "2018-02-11T17:30:50.371319";
+				mto:hasCategory "EVENT";
+				mto:hasControllerMode "AUTOMATIC".
+mto:ProgramComment1 rdf:type mto:ProgramComment;
+				saref:hasName "program_cmt";
+				mto:hasId "Mazak03-path_12";
+				mto:hasSequence "8093097";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774859";
+				mto:hasCategory "EVENT".
+mto:ProgramComment2 rdf:type mto:ProgramComment;
+				saref:hasName "subprogram_cmt";
+				mto:hasId "Mazak03-path_13";
+				mto:hasSequence "8093098";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774919";
+				mto:hasCategory "EVENT";
+				mto:hasSubType "x:SUB_PROGRAM".
+mto:RotaryVelocityOverride1 rdf:type mto:RotaryVelocityOverride;
+				saref:hasName "Sovr";
+				mto:hasId "Mazak03-path_2";
+				mto:hasSequence "8093104";
+				sem:hasTimeStamp "2018-02-11T13:50:04.971680";
+				mto:hasCategory "EVENT";
+				mto:hasRotaryVelocityOverride 100.
+mto:ToolAssetId1 rdf:type mto:ToolAssetId;
+				saref:hasName "Tool_number";
+				mto:hasId "Mazak03-path_25";
+				mto:hasSequence "8145411";
+				sem:hasTimeStamp "2018-02-11T18:07:56.675722";
+				mto:hasCategory "EVENT";
+				mto:hasToolAssetId 6.
+mto:ToolGroup1 rdf:type mto:ToolGroup;
+				saref:hasName "Tool_group";
+				mto:hasId "Mazak03-path_26";
+				mto:hasSequence "8093108";
+				sem:hasTimeStamp "2018-02-11T13:50:04.971926";
+				mto:hasCategory "EVENT";
+				mto:hasToolGroup 0.
+mto:ToolSuffix1 rdf:type mto:ToolSuffix;
+				saref:hasName "Tool_suffix";
+				mto:hasId "Mazak03-path_27";
+				mto:hasSequence "8145412";
+				sem:hasTimeStamp "2018-02-11T18:07:56.675805";
+				mto:hasCategory "EVENT";
+				mto:hasToolSuffix "G".
+mto:Program1 rdf:type mto:Program;
+				mto:hasId "Mazak03-path_3";
+				saref:hasName "program";
+				mto:hasSequence "8093095";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774749";
+				mto:hasCategory "EVENT";
+				mto:hasProgram 102.
+mto:Program2 rdf:type mto:Program;
+				mto:hasId "Mazak03-path_4";
+				saref:hasName "subprogram";
+				mto:hasSequence "8093096";
+				sem:hasTimeStamp "2018-02-11T13:50:04.774804";
+				mto:hasSubType "x:SUB";
+				mto:hasCategory "EVENT".
+mto:Line1 rdf:type mto:Line;
+				saref:hasName "line";
+				mto:hasId "Mazak03-path_5";
+				mto:hasSequence "8145347";
+				sem:hasTimeStamp "2018-02-11T18:07:49.675519";
+				mto:hasCategory "EVENT";
+				mto:hasLine 1.
+mto:xUnit1 rdf:type mto:xUnit;
+				saref:hasName "unitNum";
+				mto:hasId "Mazak03-path_6";
+				mto:hasSequence "8145350";
+				sem:hasTimeStamp "2018-02-11T18:07:49.675791";
+				mto:hasCategory "EVENT";
+				mto:hasPartCount 3.
+mto:PathFeedrateOverride1 rdf:type mto:PathFeedrateOverride;
+				saref:hasName "Frapidovr";
+				mto:hasId "Mazak03-path_8";
+				mto:hasSequence "8135233";
+				sem:hasTimeStamp "2018-02-11T17:30:48.673198";
+				mto:hasSubType "RAPID";
+				mto:hasCategory "EVENT";
+				mto:hasPathFeedrateOverride 10.
+mto:PathFeedrateOverride2 rdf:type mto:PathFeedrateOverride;
+				saref:hasName "Fovr";
+				mto:hasId "Mazak03-path_9";
+				mto:hasSequence "8128190";
+				sem:hasTimeStamp "2018-02-11T16:59:55.876490";
+				mto:hasSubType "PROGRAMMED";
+				mto:hasCategory "EVENT";
+				mto:hasPathFeedrateOverride 100.
+mto:SequenceNumber1 rdf:type mto:SequenceNumber;
+				saref:hasName "sequenceNum";
+				mto:hasId "Mazak03-path_95";
+				mto:hasSequence "8145349";
+				sem:hasTimeStamp "2018-02-11T18:07:49.675711";
+				mto:hasCategory "EVENT";
+				mto:hasSequenceNumber 1.
+mto:PartCount1 rdf:type mto:PartCount;
+				saref:hasName "PartCountAct";
+				mto:hasId "Mazak03-path_96";
+				mto:hasSequence "8093111";
+				sem:hasTimeStamp "2018-02-11T13:50:04.972104";
+				mto:hasCategory "EVENT";
+				mto:hasPartCount 0.
+mto:MotionProgram1 rdf:type mto:MotionProgram;
+				mto:hasId "Mazak03-path_17";
+				saref:hasName "motion_cond";
+				mto:hasSequence "8093115";
+				sem:hasTimeStamp "2018-02-11T13:50:04.972323";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+mto:SystemCondition2 rdf:type mto:SystemCon;
+				mto:hasId "Mazak03-path_21";
+				saref:hasName "path_system";
+				mto:hasSequence "8093116";
+				sem:hasTimeStamp "2018-02-11T13:50:04.972383";
+				mto:hasCondition "NORMAL";
+				mto:hasCategory "CONDITION".
+
+mto:System1
+	rdf:type mto:System;
+	rdfs:isDefinedBy mto: ;
+	part:partOf mto:I400;
+	owl:differentFrom mto:Controller1, mto:Axe1;
+	mto:hasId "Mazak03-systems_1";
+	saref:hasName "systems";
+	ssn:hasSubSystem mto:Elec1, mto:Hydr1, mto:Cool1, mto:Pneum1.
+
+mto:Elec1
+	rdf:type mto:Electric;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Hydr1, mto:Cool1, mto:Pneum1;
+	mto:hasId "Mazak03-electric_1";
+	saref:hasName "electric";
+	mto:hasDataItem mto:ELPowerState1, mto:ElTemperature1.
+mto:ELPowerState1 rdf:type mto:PowerState;
+				saref:hasName "power";
+				mto:hasId "Mazak03-electric_2";
+				mto:hasSequence "8093056";
+				sem:hasTimeStamp "2018-02-11T13:50:03.276541";
+				mto:hasCategory "EVENT";
+				mto:hasPowerState "ON".
+mto:ElTemperature1 rdf:type mto:Temperature;
+				saref:hasName "electric_temp";
+				mto:hasId "Mazak03-electric_3";
+				mto:hasSequence "8093071";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772472";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL".
+
+mto:Hydr1
+	rdf:type mto:Hydraulic;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Elec1, mto:Cool1, mto:Pneum1;
+	mto:hasId "Mazak03-hydraulic_1";
+	saref:hasName "hydraulic";
+	mto:hasDataItem mto:HydPressure1.
+mto:HydPressure1 rdf:type mto:Pressure;
+				saref:hasName "hydra_cond";
+				mto:hasId "Mazak03-hydraulic_2";
+				mto:hasSequence "8093067";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772162";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL".
+
+mto:Cool1
+	rdf:type mto:Coolant;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Elec1, mto:Hydr1, mto:Pneum1;
+	mto:hasId "Mazak03-coolant_1";
+	saref:hasName "coolant";
+	mto:hasDataItem mto:CoolPressure1, mto:CoolLevel1, mto:CoolTemperature1.
+mto:CoolPressure1 rdf:type mto:Pressure;
+				saref:hasName "coolant_pres";
+				mto:hasId "Mazak03-coolant_2";
+				mto:hasSequence "8093070";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772409";
+				mto:hasCategory "CONDITION";
+			    mto:hasCondition "NORMAL".
+mto:CoolLevel1 rdf:type mto:Level;
+				saref:hasName "coolant_level";
+				mto:hasId "Mazak03-coolant_4";
+				mto:hasSequence "8093068";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772241";
+				mto:hasCategory "CONDITION";
+ 				mto:hasCondition "NORMAL".
+mto:CoolTemperature1 rdf:type mto:Temperature;
+				saref:hasName "coolant_temp";
+				mto:hasId "Mazak03-coolant_3";
+				mto:hasSequence "8093069";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772320";
+				mto:hasCategory "CONDITION";
+				mto:hasCondition "NORMAL".	
+
+mto:Pneum1
+	rdf:type mto:Pneumatic;
+	rdfs:isDefinedBy mto: ;
+	owl:differentFrom mto:Elec1, mto:Hydr1, mto:Cool1;
+	mto:hasId "Mazak03-pneumatic_1";
+	saref:hasName "pneumatic";
+	mto:hasDataItem mto:PneumPressure1.
+mto:PneumPressure1 rdf:type mto:Pressure;
+				saref:hasName "pneu_cond";
+				mto:hasId "Mazak03-pneumatic_2";
+				mto:hasSequence "8093066";
+				sem:hasTimeStamp "2018-02-11T13:50:04.772083";
+				mto:hasCategory "CONDITION";
+			    mto:hasCondition "NORMAL".

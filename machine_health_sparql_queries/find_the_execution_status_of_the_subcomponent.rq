@@ -1,0 +1,14 @@
+#8. Find the execution status of the subcomponent of a device. Name the subcomponent and its data item
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT *
+WHERE
+{
+    ?device ssn:hasPart ?component.
+    ?component ssn:hasSubsystem ?subcomponent.    
+    ?subcomponent mmd:hasDataItem ?dataitem.
+    ?dataitem     mmd:hasExecution ?execution.
+   
+} 

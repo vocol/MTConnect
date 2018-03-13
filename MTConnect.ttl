@@ -1,1 +1,782 @@
-# dummy 
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn> .
+@prefix mto: <http://example.org/mto/mtconnectmachinedata#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix part: <http://www.w3.org/2001/sw/BestPractices/OEP/SimplePartWhole/part.owl#>.
+@prefix saref: <https://w3id.org/c>.
+
+# Description of this ontology
+# ----------------------------
+
+mto:
+	 rdf:type owl:Ontology;
+   	 dct:title "MTConnect Ontology"@en;
+     rdfs:comment "Ontology developed based on MTConnect standard.";
+     dct:creator "Glykeria Alvanou" ;
+     dct:created "2017-06-05"^^xsd:date;
+     dct:modified "2018-02-09"^^xsd:date;
+     vann:preferredNamespacePrefix "mto".
+
+##### CLASSES #####
+
+mto:Device 
+		rdf:type owl:Class;
+		owl:equivalentClass ssn:Device;
+		rdfs:label "Device"^^xsd:string;
+		rdfs:comment "Represents a single piece of equipment (i.e. machine) or any logical grouping of pieces of equipment that operate together to perform a function.";
+		rdf:type         owl:Restriction ; 
+		owl:onProperty   mto:hasUuid, mto:hasId, saref:hasName;
+		owl:cardinality  "1"^^xsd:nonNegativeInteger.
+     	       
+mto:Component 
+		rdf:type owl:Class;
+		rdfs:label "Component"^^xsd:string;
+		rdfs:comment "Defines the structure of the physical or logical parts of a device that provide more precise definition for the structure of the device.";
+		rdf:type         owl:Restriction ; 
+		owl:onProperty   mto:hasId;
+		owl:cardinality  "1"^^xsd:nonNegativeInteger.
+
+##Component types
+mto:Actuator
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "Actuator"^^xsd:string;
+		rdfs:comment "Describes a device for moving or controlling a mechanism or system.".
+
+mto:Axe 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "Axe"^^xsd:string;
+		rdfs:comment "Performs linear or rotational motion associated with a device.";
+		rdf:type         owl:Restriction ; 
+		owl:onProperty   ssn:hasSubSystem ;
+		owl:onClass      mto:LinearAxe, mto:RotaryAxe;
+		owl:mincardinality  "1"^^xsd:nonNegativeInteger.
+
+mto:Controller 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "Controller"^^xsd:string;
+		rdfs:comment "The intelligent or computational part of a device which monitors and calculated information.".
+
+mto:Door 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "Door"^^xsd:string;
+		rdfs:comment "Mechanisms or closures that can cover access portals into a device.";
+		owl:onProperty   mto:hasDataItem ;
+		owl:onClass      mto:DoorState;
+		owl:mincardinality  "1"^^xsd:nonNegativeInteger.
+
+mto:Interface 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:comment "The information used to coordinate actions and activity between devices or sub-systems and a device.".
+
+mto:Sensor 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "Sensor"^^xsd:string;
+		rdfs:comment "Represents a measurement device.".
+
+mto:Stock 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "Stock"^^xsd:string;
+		rdfs:comment "The material to which work is applied in a machine or piece of equipment to produce parts.".
+
+mto:System 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Component;
+		rdfs:label "System"^^xsd:string;
+		rdfs:comment "Describe the major sub-systems that provide services to a device.".
+
+
+##Subcomponent types
+
+mto:Coolant 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:System;
+		rdfs:label "Coolant"^^xsd:string;
+		rdfs:comment "Coolant represents a system comprised of all the parts involved in distribution and management of fluids that remove heat from a piece of equipment.".
+
+mto:Electric
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:System;
+		rdfs:label "Electric"^^xsd:string;
+		rdfs:comment "Electric represents the main power supply or generator for the device.".
+
+mto:Hydraulic
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:System;
+		rdfs:label "Hydraulic"^^xsd:string;
+		rdfs:comment "Hydraulic represents a system comprised of all the parts involved in moving and distributing pressurized liquid for the purpose of delivering a source of power to specific types of actuators.".
+	
+mto:LinearAxe
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Axe;
+		rdfs:label "LinearAxe"^^xsd:string;
+		rdfs:comment "Represents the movement of a physical device, or a portion of a device in a straight line.".
+
+mto:Lubrication 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:System;
+		rdfs:label "Lubrication"^^xsd:string;
+		rdfs:comment "Lubrication represents a system comprised of all the parts involved in distribution and management of fluids used to lubricate parts of the piece of the equipment.".
+
+mto:RotaryAxe #a rotary axis MUST specify a subType attribute of SPINDLE, INDEX, or CONTOUR.
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Axe;
+		rdfs:label "RotaryAxe"^^xsd:string;
+		rdfs:comment "Represents any non-linear or rotary movement of a physical device or a portion of a device.".
+
+mto:Path 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:Controller;
+		rdfs:label "Path"^^xsd:string;
+		rdfs:comment "Represents the information for an independent operation or function within a controller.".
+
+mto:Pneumatic 
+		rdf:type owl:Class;
+		rdfs:subClassOf mto:System;
+		rdfs:label "Pneumatic"^^xsd:string;
+		rdfs:comment "Represents a system comprised of all the parts involved in moving and distributing pressurized gas regardless of purpose or activity.".
+
+
+#OTHER CLASSES
+ssn:Device 			rdf:type owl:Class;
+					rdfs:label "Device"^^xsd:string;
+					rdfs:isDefinedBy ssn: ;
+					rdfs:comment "A device is a physical piece of technology - a system in a box. Devices may of course be built of smaller devices and software components (i.e. 
+systems have components).".
+
+mto:Chuck 
+		rdf:type owl:Class;
+		rdfs:label "Chuck"^^xsd:string;
+		rdfs:comment "Represents a mechanism that holds a part or stock material in place.".
+
+mto:Acceleration rdf:type owl:Class;
+					rdfs:subClassOf mto:DataItem;
+					rdfs:label "Acceleration"^^xsd:string;
+					rdfs:comment "Rate of change of velocity.".
+
+mto:AccumulatedTime rdf:type owl:Class;
+					rdfs:subClassOf mto:DataItem;
+					rdfs:label "AccumulatedTime"^^xsd:string;
+					rdfs:comment "The measurement of accumulated time for an activity or event.".
+
+mto:ActuatorCondition rdf:type owl:Class;
+					rdfs:subClassOf mto:DataItem;
+					rdfs:label "ActuatorCondition"^^xsd:string;
+					rdfs:comment "An actuator’s status.".
+
+mto:AngularVelocity rdf:type owl:Class;
+					rdfs:subClassOf mto:DataItem;
+					rdfs:label "AngularVelocity"^^xsd:string;
+		        	rdfs:comment "Rate of change of angular position.".
+
+mto:Angle rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Angle"^^xsd:string;
+		  rdfs:comment "The measurement of angular position.".
+
+mto:AssetChanged rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "AssetChanged"^^xsd:string.
+
+mto:AssetRemoved rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "AssetRemoved"^^xsd:string.
+
+mto:Availability rdf:type owl:Class;
+				 rdfs:comment "Represents the ability of a Structural Element to communicate.";
+				 rdfs:subClassOf mto:DataItem;
+				 rdfs:label "Availability"^^xsd:string;
+				 owl:oneOf (
+							"AVAILABLE" "UNAVAILABLE" ).
+
+mto:AxisFeedrate rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "AxisFeedrate"^^xsd:string;
+		  rdfs:comment "The feedrate of a linear axis.".
+
+mto:AxisFeedrateOverride rdf:type owl:Class;
+		 				 rdfs:subClassOf mto:DataItem;
+		 				 rdfs:label "AxisFeedrateOverride"^^xsd:string;
+		 				 rdfs:comment "The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis.".
+
+mto:ChuckInterlock rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "ChuckInterlock"^^xsd:string;
+		  rdfs:comment "An indication of the operational condition of the interlock function for an electronically controller chuck.".
+
+mto:ChuckState rdf:type owl:Class;
+				rdfs:subClassOf mto:DataItem;
+				rdfs:label "ChuckState"^^xsd:string;
+		owl:oneOf (
+			"OPEN" "CLOSED" "UNLATCHED" ).
+
+mto:Communication rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Communication"^^xsd:string;
+		  rdfs:comment "A communications failure indicator.".
+
+mto:Condition rdf:type owl:Class;
+			 # rdfs:subClassOf mto:DataItemCategory;
+			  rdfs:label "Condition"^^xsd:string;
+			  rdfs:comment "A CONDITION communicates information about the health of a device and its ability to function";
+			  owl:oneOf (
+							"NORMAL" "WARNING" "FAULT" "UNAVAILABLE"  ).
+
+mto:ControllerMode  rdf:type owl:Class;
+					rdfs:subClassOf mto:DataItem;
+					rdfs:label "ControllerMode"^^xsd:string;
+					rdfs:comment "The current mode of the Controller.";
+				    owl:oneOf (
+			                 "AUTOMATIC" "MANUAL" "MANUAL_DATA_INPUT" "SEMI_AUTOMATIC" "EDIT").
+
+mto:DataItem 
+		rdf:type owl:Class;
+		rdfs:label "DataItem"^^xsd:string;
+		rdfs:comment "DataItem provides a detailed description for each piece of data that is collected from a device.";
+		rdf:type         owl:Restriction ; 
+		owl:onProperty   mto:hasId, mto:hasCategory;
+		owl:cardinality  "1"^^xsd:nonNegativeInteger.
+
+#mto:DataItemCategory rdf:type owl:Class.
+
+#mto:DataItemSubType rdf:type owl:Class;
+	#	owl:oneOf (
+	#		"ACTUAL" "COMMANDED" ).
+
+mto:DataRange rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "DataRange"^^xsd:string;
+		  rdfs:comment "Information provided is outside of expected value range.".
+
+mto:Direction rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Direction"^^xsd:string;
+		  rdfs:comment "The direction of motion.".
+
+mto:DirectionCondition rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "DirectionCondition"^^xsd:string;
+		  rdfs:comment "An indication of a fault associated with the direction of motion of a Structural Element.".
+
+mto:DoorState rdf:type owl:Class;
+				rdfs:subClassOf mto:DataItem;
+				rdfs:label "DoorState"^^xsd:string;
+		owl:oneOf (
+			"OPEN" "CLOSED" "UNLATCHED" ).
+
+mto:EmergencyStop rdf:type owl:Class;
+				  rdfs:subClassOf mto:DataItem;
+				  rdfs:label "EmergencyStop"^^xsd:string;
+				  owl:oneOf (
+					"ARMED" "TRIGGERED" );
+				  rdfs:comment "The current state of the emergency stop signal for a machine, device, controller path, or any other component or subsystem of a device".
+
+mto:EndOfBar rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "EndOfBar"^^xsd:string;
+		  owl:oneOf (
+			"YES" "NO" );
+		  rdfs:comment "An indication that the end of a piece of bar stock has been reached.".
+
+#mto:Event rdf:type owl:Class;
+#		   rdfs:subClassOf mto:DataItemCategory;
+#		   rdfs:label "Event"^^xsd:string;
+#		   rdfs:comment "An EVENT is a data value representing a discrete piece of information from the device. The data provided may be a numeric value or text".
+
+mto:Execution   rdf:type owl:Class;
+				rdfs:subClassOf mto:DataItem;
+				rdfs:label "Execution"^^xsd:string;
+				rdfs:comment "The execution status of the Controller.";
+				owl:oneOf (
+			                "READY" "ACTIVE" "INTERRUPTED" "FEED_HOLD" "STOPPED" "OPTIONAL_STOP" "PROGRAM_STOPPED" "PROGRAM_COMPLETED" ).
+
+mto:FunctionalMode rdf:type owl:Class;
+					rdfs:subClassOf mto:DataItem;
+					rdfs:label "FunctionalMode"^^xsd:string;
+					rdfs:comment "The current intended production status of the device or component.";
+		owl:oneOf (
+			"PRODUCTION" "SETUP" "TEARDOWN" "MAINTENANCE" "PROCESS DEVELOPMENT" ).
+
+mto:Hardware rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Hardware"^^xsd:string;
+		  rdfs:comment "The hardware subsystem of the Structural Element’s operation condition.".
+
+mto:InterfaceState rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "InterfaceState"^^xsd:string;
+		  owl:oneOf (
+			"ENABLED" "DISABLED" );
+		  rdfs:comment "An indication of the operation condition of an Interface.".
+
+mto:Level rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Level"^^xsd:string;
+		  rdfs:comment "The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance.".
+
+mto:Line rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Line"^^xsd:string;
+		  rdfs:comment "The current line of code being executed.".
+
+mto:Load rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Load"^^xsd:string;
+		  rdfs:comment "The measurement of the actual versus the standard rating of a device.".
+
+mto:LogicProgram rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "LogicProgram"^^xsd:string;
+		  rdfs:comment "An error occurred in the logic program or PLC (programmable logic controller)".
+
+mto:MotionProgram rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "MotionProgram"^^xsd:string;
+		  rdfs:comment "An error occurred in the motion program.".
+
+mto:PalletId rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "PalletId"^^xsd:string;
+		  rdfs:comment "The identifier for the pallet currently in use.".
+
+mto:PalletNumber rdf:type owl:Class;
+		  		 rdfs:subClassOf mto:DataItem;
+		  		 rdfs:label "PalletId"^^xsd:string;
+		 		 rdfs:comment "The identifier for the pallet currently in use.".
+
+mto:PartCount rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "PartCount"^^xsd:string;
+		  rdfs:comment "The current count of parts produced as represented by the Controller.".	
+
+mto:PathFeedrate rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "PathFeedrate"^^xsd:string;
+		  rdfs:comment "The feedrate for the axes associated with a Path component - may represent a single axis or the coordinated movement of multiple axes – a vector.".
+
+mto:PathFeedrateOverride rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "PathFeedrateOverride"^^xsd:string;
+		  rdfs:comment "The value of a signal or calculation issued to adjust the feedrate for the axes associated with a Path component.".
+
+mto:PathPosition rdf:type owl:Class;
+		  		 rdfs:subClassOf mto:DataItem;
+		  		 rdfs:label "PathPosition"^^xsd:string;
+		  		 rdfs:comment "The current program control point expressed in WORK coordinates.".
+
+mto:Pressure rdf:type owl:Class;
+		  	 rdfs:subClassOf mto:DataItem;
+		  	 rdfs:label "Pressure"^^xsd:string;
+		  	 rdfs:comment "The force per unit area exerted by a gas or liquid.".
+
+mto:Program rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Program"^^xsd:string;
+		  rdfs:comment "The name of the program being executed by the Controller component.".
+
+mto:ProgramComment rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "ProgramComment"^^xsd:string;
+		  rdfs:comment "A comment or non-executable statement in the control program.".
+
+mto:ProgramEdit rdf:type owl:Class;
+				rdfs:subClassOf mto:DataItem;
+				rdfs:label "ProgramEdit"^^xsd:string;
+				rdfs:comment "An indication of the Controller component’s program editing mode.";
+		owl:oneOf (
+			"ACTIVE" "READY" "NOT_READY" "UNAVAILABLE" ).
+
+mto:ProgramEditName rdf:type owl:Class;
+		  			rdfs:subClassOf mto:DataItem;
+		 			rdfs:label "ProgramEditName"^^xsd:string;
+		  			rdfs:comment "The name of the program being edited.".
+
+mto:Position rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Position"^^xsd:string;
+		  rdfs:comment "The position of the component.".
+
+mto:PowerState  rdf:type owl:Class;
+				rdfs:subClassOf mto:DataItem;
+				rdfs:label "PowerState"^^xsd:string;
+				rdfs:comment "The indication of the status of the source of energy for a Structural Element to allow it to perform its intended function and the state of an enabling signal providing permission for the Structural Element to perform its functions.";
+				owl:oneOf (
+									"ON" "OFF" "UNAVAILABLE" ).
+
+mto:RotaryMode rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "RotaryMode"^^xsd:string;
+		  owl:oneOf (
+			"SPINDLE" "INDEX" "CONTOUR");
+		  rdfs:comment "The mode for a Rotary type axis.".
+
+mto:RotaryVelocity rdf:type owl:Class;
+		  		   rdfs:subClassOf mto:DataItem;
+		  		   rdfs:label "RotaryVelocity"^^xsd:string;
+		  		   rdfs:comment "The rotational speed of a rotary axis.".
+
+mto:RotaryVelocityOverride rdf:type owl:Class;
+		  				   rdfs:subClassOf mto:DataItem;
+		  			       rdfs:label "RotaryVelocityOverride"^^xsd:string;
+		  				   rdfs:comment "A command issued to adjust the programmed velocity for a Rotary type axis.".
+
+#mto:Sample rdf:type owl:Class;
+		 #  rdfs:subClassOf mto:DataItemCategory;
+		 #  rdfs:label "Sample"^^xsd:string;
+		 #  rdfs:comment "A SAMPLE is the reading of the value of a continuously variable or analog data value".
+
+mto:SequenceNumber rdf:type owl:Class;
+		  			rdfs:subClassOf mto:DataItem;
+		  			rdfs:label "SequenceNumber"^^xsd:string.
+
+mto:SystemCondition rdf:type owl:Class;
+		  			rdfs:subClassOf mto:DataItem;
+		  			rdfs:label "SystemCondition"^^xsd:string;
+		  			rdfs:comment "A CONDITION representing something that is not the operator, program, or hardware.".
+
+mto:Temperature rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Temperature"^^xsd:string;
+		  rdfs:comment "The measurement of temperature.".
+
+mto:ToolAssetId rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "ToolAssetId"^^xsd:string;
+		  rdfs:comment "The identifier of an individual tool asset which is the current tool in use by a piece of equipment.".
+
+mto:ToolGroup rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "ToolGroup"^^xsd:string.
+
+mto:ToolNumber rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "ToolNumber"^^xsd:string;
+		  rdfs:comment "The identifier assigned by the Controller component to the current tool in use by a piece of equipment.".
+
+mto:ToolSuffix rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "ToolSuffix"^^xsd:string.
+
+mto:Torque rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Torque"^^xsd:string;
+		  rdfs:comment "The turning force exerted on an object or by an object.".	
+
+mto:Velocity rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Velocity"^^xsd:string;
+		  rdfs:comment "The rate of change of position.".
+
+mto:Voltage rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "Voltage"^^xsd:string;
+		  rdfs:comment "The measurement of electrical potential between two points.".
+
+mto:xMotion rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "xMotion"^^xsd:string.
+
+mto:xUnit rdf:type owl:Class;
+		  rdfs:subClassOf mto:DataItem;
+		  rdfs:label "xUnit"^^xsd:string.
+
+#### PROPERTIES ####
+
+#### Object Properties ####
+
+mto:hasAvailability				
+				rdf:type 	    owl:ObjectProperty;
+		      	rdfs:domain 	mto:DataItem; #ssn:Device, mto:Component
+		      	rdfs:range 		mto:Availability. 
+
+mto:hasCondition 
+				rdf:type 	owl:ObjectProperty;
+		      	rdfs:domain  mto:DataItem; #mto:Component; rdfs:range
+		      	rdfs:range   mto:Condition.  	 
+
+mto:hasControllerMode
+				rdf:type 		owl:ObjectProperty;
+		      	rdfs:domain 	mto:DataItem;
+		      	rdfs:range 		mto:ControllerMode.
+
+mto:hasDataItem
+				rdf:type 	    owl:ObjectProperty;
+		      	rdfs:domain 	mto:Device, mto:Component;
+		      	rdfs:range 	    mto:DataItem.
+
+mto:hasEmergencyStop
+				rdf:type 	owl:ObjectProperty;
+		      	rdfs:domain 	mto:DataItem;
+		      	rdfs:range mto:EmergencyStop. #mto:Device, mto:Component; rdfs:range 	 
+		      	
+mto:hasExecution
+				rdf:type 	owl:ObjectProperty;
+		      	rdfs:domain  mto:DataItem; 	 
+		      	rdfs:range mto:Execution.
+
+mto:hasFunctionalMode				
+				rdf:type 	owl:ObjectProperty;
+		      	rdfs:domain mto:DataItem;
+		      	rdfs:range mto:FunctionalMode.#	mto:Device, mto:Component; rdfs:range 	 
+
+
+mto:hasProgramEdit
+				rdf:type 	owl:ObjectProperty;
+		      	rdfs:domain mto:DataItem;
+		      	rdfs:range mto:ProgramEdit.#	mto:Controller; rdfs:range 	 
+		      	
+mto:hasPowerState	
+				rdf:type 		owl:ObjectProperty;
+		      	rdfs:domain 	mto:DataItem; #mto:Device, mto:Component;rdfs:range 	 
+		      	rdfs:range  	mto:PowerState.
+
+mto:hasChuckState	
+				rdf:type 	owl:ObjectProperty;
+		      	rdfs:domain 	mto:Chuck;
+		      	rdfs:range 	mto:ChuckState.
+
+#### Datatype Properties ####
+
+mto:hasAccumulatedTime	 
+				rdf:type 			owl:DatatypeProperty;
+		      	rdfs:domain 		mto:AccumulatedTime;
+		      	rdfs:range 	 		xsd:string.
+
+mto:hasAngle 		
+				rdf:type 			owl:DatatypeProperty;
+		      	rdfs:domain 		mto:Angle; 
+		      	rdfs:range 	 		rdfs:Literal.
+
+mto:hasAngularVelocity 	
+				rdf:type 					owl:DatatypeProperty;
+				rdfs:subPropertyOf 			owl:hasValue;
+		      	rdfs:domain 				mto:AngularVelocity; 
+		      	rdfs:range 	 				rdfs:Literal.
+
+mto:hasAxisFeedrate	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:AxisFeedrate;
+		      	rdfs:range 	 	rdfs:Literal.
+
+mto:hasCategory 
+				rdf:type 		owl:ObjectProperty;
+		      	rdfs:domain 	mto:DataItem;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasConditionMessage
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Condition;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasConfiguration
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Sensor;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasCoordinateSystem
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		xsd:string.
+
+mto:hasCreationTime	
+				rdf:type 			owl:DatatypeProperty;
+		      	rdfs:domain 		mto:Device; 
+		      	rdfs:range 	 		xsd:dateTime;
+		      	rdfs:comment 		"The time the request was made.".
+mto:hasId	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:Device, mto:Component, mto:DataItem;
+			rdfs:range 		xsd:string;
+			rdfs:comment    "A unique identifier of a structural element.".
+
+mto:hasLine		
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Line;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasLoad 	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Load;
+		      	rdfs:range 	 	rdfs:Literal.
+
+#saref:hasName	
+		#	rdf:type 	owl:DatatypeProperty;
+		#	rdfs:domain 	ssn:Device, mto:Component, mto:DataItem;
+		#	rdfs:range 		 xsd:string;
+		#	rdfs:comment    "The name of the device or a component.";
+		#	rdfs:label "has name".
+
+mto:hasNativeScale	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		xsd:string.
+
+mto:hasNativeUnits	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		xsd:string.
+
+mto:hasPalletId
+				rdf:type 		owl:DatatypeProperty ;
+		      	rdfs:domain 	mto:PalletId ;
+		      	rdfs:range		xsd:string.
+
+mto:hasPalletNumber
+				rdf:type 		owl:DatatypeProperty ;
+		      	rdfs:domain 	mto:PalletNumber ;
+		      	rdfs:range 		xsd:string.
+
+#ssn:hasPart
+			#rdf:type owl:TransitiveProperty;
+			#rdfs:label "has part";
+			#rdfs:comment "A schematic relation between any entities e.g. 'the human body has a brain as part".
+			
+mto:hasPartCount	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:PartCount;
+		      	rdfs:range 	 	rdfs:Literal.
+
+mto:hasPathFeedrate	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:PathFeedrate;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasPathFeedrateOverride	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:PathFeedrateOverride;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasPathPosition	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Path;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasPosition	
+				rdf:type 	    owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Position;
+		      	rdfs:range 	    xsd:string.	
+
+mto:hasPressure
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Pressure;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasProgram
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:Controller;
+		      	rdfs:range 	 	xsd:string.	
+
+mto:hasProgramComment
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:ProgramComment;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasProgramEditName
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:ProgramEditName;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasRotaryMode
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:RotaryMode;
+		      	rdfs:range 		xsd:string.
+
+mto:hasRotaryVelocity 	
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:RotaryVelocity;
+		      	rdfs:range 	 	xsd:string.	
+
+mto:hasRotaryVelocityOverride
+				rdf:type 		owl:DatatypeProperty;
+		      	rdfs:domain 	mto:RotaryVelocityOverride;
+		      	rdfs:range 	 	xsd:string.
+
+mto:hasSampleRate	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		 xsd:string.
+
+mto:hasSequence
+			rdf:type 	owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+		    rdfs:range xsd:integer.
+
+mto:hasSequenceNumber
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+		    rdfs:range 		xsd:integer.
+
+mto:hasSignificantDigits
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		 xsd:string.
+
+mto:hasSubType	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range      rdfs:string;
+			rdfs:comment    "A sub-categorization of the data item type.".
+
+mto:hasTemperature 	
+				rdf:type 			owl:DatatypeProperty;
+				rdfs:subPropertyOf  owl:hasValue;
+		      	rdfs:domain   		mto:Temperature;
+		      	rdfs:range 			xsd:string.
+
+mto:hasToolAssetId 	
+				rdf:type 	  owl:DatatypeProperty;
+		      	rdfs:domain   mto:ToolAssetId;
+		      	rdfs:range 	  xsd:string.
+
+mto:hasToolGroup 	
+				rdf:type 	  owl:DatatypeProperty;
+		      	rdfs:domain   mto:ToolGroup;
+		      	rdfs:range 	  xsd:string.
+
+mto:hasToolNumber 	
+				rdf:type 	  owl:DatatypeProperty;
+		      	rdfs:domain   mto:ToolNumber;
+		      	rdfs:range 	  xsd:string.
+
+mto:hasToolSuffix 	
+				rdf:type 	  owl:DatatypeProperty;
+		      	rdfs:domain   mto:ToolSuffix;
+		      	rdfs:range 	  xsd:string.
+#mto:hasTimestamp	
+		#		rdf:type 		owl:DatatypeProperty;
+		#      	rdfs:domain  	mto:DataItem; 
+		#      	rdfs:range 	 	xsd:dateTime;
+		 #     	rdfs:comment 	"The time the data were reported.".	
+
+mto:hasUnits	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		xsd:string.	
+
+mto:hasUuid	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:Device, mto:Component;
+			rdfs:range 		rdfs:Literal;
+			rdfs:comment 	"A unique identifier that will only refer to this device.".	
+
+mto:hasxMotion	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		rdfs:Literal.
+
+mto:hasxUnit	
+			rdf:type 		owl:DatatypeProperty;
+			rdfs:domain 	mto:DataItem;
+			rdfs:range 		rdfs:Literal.
+
+

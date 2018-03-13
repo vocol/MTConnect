@@ -1,0 +1,15 @@
+#6. Find the components who have a dataitem Emergency and the emergencystop condition
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX sem: <http://semanticweb.cs.vu.nl/2009/11/sem/>
+PREFIX saref: <https://w3id.org/c>
+SELECT ?device ?component ?dataitem ?timestamp ?emergencystop
+WHERE
+{
+    ?device saref:hasName ?name;
+            ssn:hasPart ?component.
+    ?component mmd:hasDataItem ?dataitem.
+    ?dataitem mmd:hasEmergencyStop ?emergencystop;
+              sem:hasTimestamp ?timestamp.
+}  

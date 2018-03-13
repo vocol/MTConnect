@@ -1,0 +1,12 @@
+
+#Find the all dataitems of all the components
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+SELECT *
+WHERE
+{
+    ?device ssn:hasPart ?component.
+    ?component mmd:hasDataItem ?dataitem.
+  	
+}  

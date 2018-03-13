@@ -1,0 +1,11 @@
+# Find the components and subcomponents of each device
+PREFIX mmd: <http://example.org/mmd/mazakmachinedata#2>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT *
+WHERE
+{
+    ?device ssn:hasPart ?component.
+    ?component ssn:hasSubsystem ?subcomponent.    
+}  
