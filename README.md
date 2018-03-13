@@ -3,7 +3,7 @@
 This ontology conforms to the [MTConnect](http://www.mtconnect.org/) standard (Version 1.3.1) and includes sample data and queries to proof its functionality. We used [Semantic Web](https://www.w3.org/standards/semanticweb/) technologies for expressing the ontology. 
 
 ## Visualization
-<todo>
+*todo*
 
 ## Creator
 * [Gylkeria Alvanou](https://github.com/GlykeriaAlvanou) - MSc Student @ University of Bonn
@@ -11,4 +11,4 @@ This ontology conforms to the [MTConnect](http://www.mtconnect.org/) standard (V
 
 
 ## Licence 
-<to be determined> 
+*to be determined*
