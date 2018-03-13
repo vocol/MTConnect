@@ -6,7 +6,7 @@ This ontology conforms to the [MTConnect](http://www.mtconnect.org/) standard (V
 *todo*
 
 ## Creator
-* [Gylkeria Alvanou](https://github.com/GlykeriaAlvanou) - MSc Student @ University of Bonn
+* [Glykeria Alvanou](https://github.com/GlykeriaAlvanou) - MSc Student @ University of Bonn
 * [Niklas Petersen](http://np00.github.io/) - Ontology Engineer @ [Fraunhofer IAIS](https://www.iais.fraunhofer.de/) / University of Bonn
 
 
