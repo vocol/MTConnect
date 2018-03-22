@@ -4,7 +4,7 @@ This ontology conforms to the [MTConnect](http://www.mtconnect.org/) standard (V
 
 ## Visualization
 *todo*
-
+![Ontology Graph Visualization](Ontologygraph2.png)
 ## Creator
 * [Glykeria Alvanou](https://github.com/GlykeriaAlvanou) - MSc Student @ University of Bonn
 * [Niklas Petersen](http://np00.github.io/) - Ontology Engineer @ [Fraunhofer IAIS](https://www.iais.fraunhofer.de/) / University of Bonn
