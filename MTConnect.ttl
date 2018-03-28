@@ -7,7 +7,7 @@
 @prefix mto: <http://example.org/mto/mtconnectmachinedata#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix part: <http://www.w3.org/2001/sw/BestPractices/OEP/SimplePartWhole/part.owl#>.
-@prefix saref: <https://w3id.org/c>.
+@prefix saref: <https://w3id.org/saref#>.
 
 # Description of this ontology
 # ----------------------------
@@ -18,7 +18,7 @@ mto:
      rdfs:comment "Ontology developed based on MTConnect standard.";
      dct:creator "Glykeria Alvanou" ;
      dct:created "2017-06-05"^^xsd:date;
-     dct:modified "2018-02-09"^^xsd:date;
+     dct:modified "2018-03-28"^^xsd:date;
      vann:preferredNamespacePrefix "mto".
 
 ##### CLASSES #####
@@ -28,17 +28,14 @@ mto:Device
 		owl:equivalentClass ssn:Device;
 		rdfs:label "Device"^^xsd:string;
 		rdfs:comment "Represents a single piece of equipment (i.e. machine) or any logical grouping of pieces of equipment that operate together to perform a function.";
-		rdf:type         owl:Restriction ; 
-		owl:onProperty   mto:hasUuid, mto:hasId, saref:hasName;
-		owl:cardinality  "1"^^xsd:nonNegativeInteger.
+		.
+
      	       
 mto:Component 
 		rdf:type owl:Class;
 		rdfs:label "Component"^^xsd:string;
 		rdfs:comment "Defines the structure of the physical or logical parts of a device that provide more precise definition for the structure of the device.";
-		rdf:type         owl:Restriction ; 
-		owl:onProperty   mto:hasId;
-		owl:cardinality  "1"^^xsd:nonNegativeInteger.
+		.
 
 ##Component types
 mto:Actuator
@@ -52,10 +49,12 @@ mto:Axe
 		rdfs:subClassOf mto:Component;
 		rdfs:label "Axe"^^xsd:string;
 		rdfs:comment "Performs linear or rotational motion associated with a device.";
-		rdf:type         owl:Restriction ; 
-		owl:onProperty   ssn:hasSubSystem ;
-		owl:onClass      mto:LinearAxe, mto:RotaryAxe;
-		owl:mincardinality  "1"^^xsd:nonNegativeInteger.
+		
+		# NP: Restrictions have to be created either via subclass or equivalent classes. Also I am not sure this is what you want to achieve. 
+		#rdf:type         owl:Restriction ; 
+		#owl:onProperty   ssn:hasSubSystem ;
+		#owl:onClass      mto:LinearAxe, mto:RotaryAxe;
+		#owl:mincardinality  "1"^^xsd:nonNegativeInteger.
 
 mto:Controller 
 		rdf:type owl:Class;
@@ -68,9 +67,9 @@ mto:Door
 		rdfs:subClassOf mto:Component;
 		rdfs:label "Door"^^xsd:string;
 		rdfs:comment "Mechanisms or closures that can cover access portals into a device.";
-		owl:onProperty   mto:hasDataItem ;
-		owl:onClass      mto:DoorState;
-		owl:mincardinality  "1"^^xsd:nonNegativeInteger.
+		#owl:onProperty   mto:hasDataItem ;
+		#owl:onClass      mto:DoorState;
+		#owl:mincardinality  "1"^^xsd:nonNegativeInteger.
 
 mto:Interface 
 		rdf:type owl:Class;
@@ -217,8 +216,8 @@ mto:ChuckInterlock rdf:type owl:Class;
 mto:ChuckState rdf:type owl:Class;
 				rdfs:subClassOf mto:DataItem;
 				rdfs:label "ChuckState"^^xsd:string;
-		owl:oneOf (
-			"OPEN" "CLOSED" "UNLATCHED" ).
+		#owl:oneOf (
+		#	"OPEN" "CLOSED" "UNLATCHED" ).
 
 mto:Communication rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
@@ -229,23 +228,23 @@ mto:Condition rdf:type owl:Class;
 			 # rdfs:subClassOf mto:DataItemCategory;
 			  rdfs:label "Condition"^^xsd:string;
 			  rdfs:comment "A CONDITION communicates information about the health of a device and its ability to function";
-			  owl:oneOf (
-							"NORMAL" "WARNING" "FAULT" "UNAVAILABLE"  ).
+			  #owl:oneOf (
+			#				"NORMAL" "WARNING" "FAULT" "UNAVAILABLE"  ).
 
 mto:ControllerMode  rdf:type owl:Class;
 					rdfs:subClassOf mto:DataItem;
 					rdfs:label "ControllerMode"^^xsd:string;
 					rdfs:comment "The current mode of the Controller.";
-				    owl:oneOf (
-			                 "AUTOMATIC" "MANUAL" "MANUAL_DATA_INPUT" "SEMI_AUTOMATIC" "EDIT").
+				   # owl:oneOf (
+			       #          "AUTOMATIC" "MANUAL" "MANUAL_DATA_INPUT" "SEMI_AUTOMATIC" "EDIT").
 
 mto:DataItem 
 		rdf:type owl:Class;
 		rdfs:label "DataItem"^^xsd:string;
 		rdfs:comment "DataItem provides a detailed description for each piece of data that is collected from a device.";
-		rdf:type         owl:Restriction ; 
-		owl:onProperty   mto:hasId, mto:hasCategory;
-		owl:cardinality  "1"^^xsd:nonNegativeInteger.
+		#rdf:type         owl:Restriction ; 
+		#owl:onProperty   mto:hasId, mto:hasCategory;
+		#owl:cardinality  "1"^^xsd:nonNegativeInteger.
 
 #mto:DataItemCategory rdf:type owl:Class.
 
@@ -271,21 +270,21 @@ mto:DirectionCondition rdf:type owl:Class;
 mto:DoorState rdf:type owl:Class;
 				rdfs:subClassOf mto:DataItem;
 				rdfs:label "DoorState"^^xsd:string;
-		owl:oneOf (
-			"OPEN" "CLOSED" "UNLATCHED" ).
+		#owl:oneOf (
+	#		"OPEN" "CLOSED" "UNLATCHED" ).
 
 mto:EmergencyStop rdf:type owl:Class;
 				  rdfs:subClassOf mto:DataItem;
 				  rdfs:label "EmergencyStop"^^xsd:string;
-				  owl:oneOf (
-					"ARMED" "TRIGGERED" );
+				 # owl:oneOf (
+				#	"ARMED" "TRIGGERED" );
 				  rdfs:comment "The current state of the emergency stop signal for a machine, device, controller path, or any other component or subsystem of a device".
 
 mto:EndOfBar rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
 		  rdfs:label "EndOfBar"^^xsd:string;
-		  owl:oneOf (
-			"YES" "NO" );
+		  #owl:oneOf (
+		#s	"YES" "NO" );
 		  rdfs:comment "An indication that the end of a piece of bar stock has been reached.".
 
 #mto:Event rdf:type owl:Class;
@@ -297,15 +296,15 @@ mto:Execution   rdf:type owl:Class;
 				rdfs:subClassOf mto:DataItem;
 				rdfs:label "Execution"^^xsd:string;
 				rdfs:comment "The execution status of the Controller.";
-				owl:oneOf (
-			                "READY" "ACTIVE" "INTERRUPTED" "FEED_HOLD" "STOPPED" "OPTIONAL_STOP" "PROGRAM_STOPPED" "PROGRAM_COMPLETED" ).
+				#owl:oneOf (
+			    #            "READY" "ACTIVE" "INTERRUPTED" "FEED_HOLD" "STOPPED" "OPTIONAL_STOP" "PROGRAM_STOPPED" "PROGRAM_COMPLETED" ).
 
 mto:FunctionalMode rdf:type owl:Class;
 					rdfs:subClassOf mto:DataItem;
 					rdfs:label "FunctionalMode"^^xsd:string;
 					rdfs:comment "The current intended production status of the device or component.";
-		owl:oneOf (
-			"PRODUCTION" "SETUP" "TEARDOWN" "MAINTENANCE" "PROCESS DEVELOPMENT" ).
+		#owl:oneOf (
+	#		"PRODUCTION" "SETUP" "TEARDOWN" "MAINTENANCE" "PROCESS DEVELOPMENT" ).
 
 mto:Hardware rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
@@ -315,8 +314,8 @@ mto:Hardware rdf:type owl:Class;
 mto:InterfaceState rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
 		  rdfs:label "InterfaceState"^^xsd:string;
-		  owl:oneOf (
-			"ENABLED" "DISABLED" );
+		 # owl:oneOf (
+	#		"ENABLED" "DISABLED" );
 		  rdfs:comment "An indication of the operation condition of an Interface.".
 
 mto:Level rdf:type owl:Class;
@@ -393,8 +392,8 @@ mto:ProgramEdit rdf:type owl:Class;
 				rdfs:subClassOf mto:DataItem;
 				rdfs:label "ProgramEdit"^^xsd:string;
 				rdfs:comment "An indication of the Controller component’s program editing mode.";
-		owl:oneOf (
-			"ACTIVE" "READY" "NOT_READY" "UNAVAILABLE" ).
+		#owl:oneOf (
+	#		"ACTIVE" "READY" "NOT_READY" "UNAVAILABLE" ).
 
 mto:ProgramEditName rdf:type owl:Class;
 		  			rdfs:subClassOf mto:DataItem;
@@ -410,14 +409,14 @@ mto:PowerState  rdf:type owl:Class;
 				rdfs:subClassOf mto:DataItem;
 				rdfs:label "PowerState"^^xsd:string;
 				rdfs:comment "The indication of the status of the source of energy for a Structural Element to allow it to perform its intended function and the state of an enabling signal providing permission for the Structural Element to perform its functions.";
-				owl:oneOf (
-									"ON" "OFF" "UNAVAILABLE" ).
+				#owl:oneOf (
+				#					"ON" "OFF" "UNAVAILABLE" ).
 
 mto:RotaryMode rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
 		  rdfs:label "RotaryMode"^^xsd:string;
-		  owl:oneOf (
-			"SPINDLE" "INDEX" "CONTOUR");
+		  #owl:oneOf (
+		#	"SPINDLE" "INDEX" "CONTOUR");
 		  rdfs:comment "The mode for a Rotary type axis.".
 
 mto:RotaryVelocity rdf:type owl:Class;
