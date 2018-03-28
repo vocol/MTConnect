@@ -17,7 +17,8 @@ mto:
    	 dct:title "MTConnect Ontology"@en;
      rdfs:comment "Ontology developed based on MTConnect standard.";
      dct:creator "Glykeria Alvanou" ;
-     dct:created "2017-06-05"^^xsd:date;
+     dct:creator <http://np00.github.io/> ;
+     dct:contributor "2017-06-05"^^xsd:date;
      dct:modified "2018-03-28"^^xsd:date;
      vann:preferredNamespacePrefix "mto".
 
@@ -49,7 +50,7 @@ mto:Axe
 		rdfs:subClassOf mto:Component;
 		rdfs:label "Axe"^^xsd:string;
 		rdfs:comment "Performs linear or rotational motion associated with a device.";
-		
+		.
 		# NP: Restrictions have to be created either via subclass or equivalent classes. Also I am not sure this is what you want to achieve. 
 		#rdf:type         owl:Restriction ; 
 		#owl:onProperty   ssn:hasSubSystem ;
@@ -70,6 +71,7 @@ mto:Door
 		#owl:onProperty   mto:hasDataItem ;
 		#owl:onClass      mto:DoorState;
 		#owl:mincardinality  "1"^^xsd:nonNegativeInteger.
+		.
 
 mto:Interface 
 		rdf:type owl:Class;
@@ -150,8 +152,8 @@ mto:Pneumatic
 ssn:Device 			rdf:type owl:Class;
 					rdfs:label "Device"^^xsd:string;
 					rdfs:isDefinedBy ssn: ;
-					rdfs:comment "A device is a physical piece of technology - a system in a box. Devices may of course be built of smaller devices and software components (i.e. 
-systems have components).".
+					rdfs:comment """A device is a physical piece of technology - a system in a box. Devices may of course be built of smaller devices and software components (i.e. 
+systems have components).""".
 
 mto:Chuck 
 		rdf:type owl:Class;
@@ -218,6 +220,7 @@ mto:ChuckState rdf:type owl:Class;
 				rdfs:label "ChuckState"^^xsd:string;
 		#owl:oneOf (
 		#	"OPEN" "CLOSED" "UNLATCHED" ).
+		.
 
 mto:Communication rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
@@ -230,6 +233,7 @@ mto:Condition rdf:type owl:Class;
 			  rdfs:comment "A CONDITION communicates information about the health of a device and its ability to function";
 			  #owl:oneOf (
 			#				"NORMAL" "WARNING" "FAULT" "UNAVAILABLE"  ).
+			.
 
 mto:ControllerMode  rdf:type owl:Class;
 					rdfs:subClassOf mto:DataItem;
@@ -237,6 +241,7 @@ mto:ControllerMode  rdf:type owl:Class;
 					rdfs:comment "The current mode of the Controller.";
 				   # owl:oneOf (
 			       #          "AUTOMATIC" "MANUAL" "MANUAL_DATA_INPUT" "SEMI_AUTOMATIC" "EDIT").
+			       .
 
 mto:DataItem 
 		rdf:type owl:Class;
@@ -245,6 +250,7 @@ mto:DataItem
 		#rdf:type         owl:Restriction ; 
 		#owl:onProperty   mto:hasId, mto:hasCategory;
 		#owl:cardinality  "1"^^xsd:nonNegativeInteger.
+		.
 
 #mto:DataItemCategory rdf:type owl:Class.
 
@@ -272,6 +278,7 @@ mto:DoorState rdf:type owl:Class;
 				rdfs:label "DoorState"^^xsd:string;
 		#owl:oneOf (
 	#		"OPEN" "CLOSED" "UNLATCHED" ).
+	.
 
 mto:EmergencyStop rdf:type owl:Class;
 				  rdfs:subClassOf mto:DataItem;
@@ -298,6 +305,7 @@ mto:Execution   rdf:type owl:Class;
 				rdfs:comment "The execution status of the Controller.";
 				#owl:oneOf (
 			    #            "READY" "ACTIVE" "INTERRUPTED" "FEED_HOLD" "STOPPED" "OPTIONAL_STOP" "PROGRAM_STOPPED" "PROGRAM_COMPLETED" ).
+			    .
 
 mto:FunctionalMode rdf:type owl:Class;
 					rdfs:subClassOf mto:DataItem;
@@ -305,6 +313,7 @@ mto:FunctionalMode rdf:type owl:Class;
 					rdfs:comment "The current intended production status of the device or component.";
 		#owl:oneOf (
 	#		"PRODUCTION" "SETUP" "TEARDOWN" "MAINTENANCE" "PROCESS DEVELOPMENT" ).
+	.
 
 mto:Hardware rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
@@ -394,6 +403,7 @@ mto:ProgramEdit rdf:type owl:Class;
 				rdfs:comment "An indication of the Controller component’s program editing mode.";
 		#owl:oneOf (
 	#		"ACTIVE" "READY" "NOT_READY" "UNAVAILABLE" ).
+	.
 
 mto:ProgramEditName rdf:type owl:Class;
 		  			rdfs:subClassOf mto:DataItem;
@@ -411,6 +421,7 @@ mto:PowerState  rdf:type owl:Class;
 				rdfs:comment "The indication of the status of the source of energy for a Structural Element to allow it to perform its intended function and the state of an enabling signal providing permission for the Structural Element to perform its functions.";
 				#owl:oneOf (
 				#					"ON" "OFF" "UNAVAILABLE" ).
+				.
 
 mto:RotaryMode rdf:type owl:Class;
 		  rdfs:subClassOf mto:DataItem;
